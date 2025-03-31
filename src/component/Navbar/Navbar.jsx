@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 import { auth, logout } from "../../firebase"; // Ensure auth is imported
 import { onAuthStateChanged } from "firebase/auth";
@@ -15,18 +16,36 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/about">About</NavLink>
+    <nav>
+      <h1>E-commerce</h1>
+      <div className="nav-links">
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          About
+        </NavLink>
 
-      {user ? (
-        <div onClick={logout} style={{ cursor: "pointer" }}>
-          Logout
-        </div>
-      ) : (
-        <NavLink to="/login">Login</NavLink>
-      )}
-    </div>
+        {user ? (
+          <div onClick={logout} style={{ cursor: "pointer" }}>
+            Logout
+          </div>
+        ) : (
+          <NavLink
+            to="/login"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Login
+          </NavLink>
+        )}
+      </div>
+    </nav>
   );
 };
 
